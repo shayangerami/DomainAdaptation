@@ -538,4 +538,3 @@ cd MMD && python train_mmd.py
 
 ---
 
-**Project Complete!** 🎉 All domain adaptation methods implemented and evaluated.
