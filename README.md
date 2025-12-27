@@ -29,6 +29,8 @@ Train a COVID-19 classifier on **CT scans** (source domain), then adapt it to **
 - **Preprocessing**: PNEUMONIA class removed, classes balanced
 - **Note**: Use download_xray_data.py to download CT dataset from Kaggle.
 
+See DATA_README for more detail about datasets.
+
 ---
 
 ## 🏆 Domain Adaptation Results
