@@ -1,0 +1,10 @@
+{
+  "method": "DANN (Domain Adversarial Neural Network)",
+  "source_domain": "CT",
+  "target_domain": "X-ray",
+  "best_val_acc": 95.65217391304348,
+  "test_acc": 97.10144927536231,
+  "num_epochs_trained": 20,
+  "learning_rate": 5e-05,
+  "timestamp": "2025-12-27 12:47:38"
+}

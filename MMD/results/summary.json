@@ -1,0 +1,11 @@
+{
+  "method": "MMD (Maximum Mean Discrepancy)",
+  "source_domain": "CT",
+  "target_domain": "X-ray",
+  "best_val_acc": 90.57971014492753,
+  "test_acc": 84.05797101449275,
+  "mmd_weight": 1.0,
+  "num_epochs_trained": 20,
+  "learning_rate": 0.0001,
+  "timestamp": "2025-12-27 14:27:02"
+}

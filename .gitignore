@@ -1,0 +1,54 @@
+# Model checkpoints and weights (exclude to save space)
+checkpoints/
+*.pth
+*.pt
+*.ckpt
+weights/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Dataset cache (if any)
+*.cache
+.cache/
+
+# Logs (optional - you can include logs if you want)
+# Uncomment to exclude logs:
+# logs/
+# *.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Training outputs (large files)
+# Uncomment if you want to exclude results:
+# results/
+# */results/
+
+# Specific large result files
+*.png
+*.jpg
+*.jpeg
+*.gif
+# But keep sample images if needed - remove above if you want to keep visualizations
