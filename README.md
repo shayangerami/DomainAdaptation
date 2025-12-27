@@ -18,6 +18,7 @@ Train a COVID-19 classifier on **CT scans** (source domain), then adapt it to **
 - **Val**: 60 (30 each)
 - **Test**: 200 (100 each)
 - **Location**: `~/.cache/kagglehub/.../Chest_CT`
+- **Note**: Use download_data.py to download CT dataset from Kaggle.
 
 ### ✅ Target Domain: X-rays  
 - **Total**: 920 images
@@ -26,6 +27,7 @@ Train a COVID-19 classifier on **CT scans** (source domain), then adapt it to **
 - **Test**: 138 (69 each)
 - **Location**: `~/.cache/kagglehub/.../Processed_XRay`
 - **Preprocessing**: PNEUMONIA class removed, classes balanced
+- **Note**: Use download_xray_data.py to download CT dataset from Kaggle.
 
 ---
 
