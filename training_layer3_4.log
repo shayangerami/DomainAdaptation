@@ -1,274 +1,0 @@
-/home/sgram/.local/lib/python3.8/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
-  warnings.warn(
-/home/sgram/.local/lib/python3.8/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
-  warnings.warn(msg)
-/home/sgram/CTXray/model.py:45: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
-  state_dict = torch.load(pretrained_path, map_location='cpu')
-train.py:150: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
-  self.scaler = GradScaler() if self.use_amp else None
-
-======================================================================
-Configuration: stage1_classifier
-======================================================================
-
-Model:
-  architecture: resnet50
-  num_classes: 2
-  freeze_backbone: True
-
-Training:
-  num_epochs: 25
-  batch_size: 32
-  learning_rate: 0.0005
-  optimizer: adam
-
-Data:
-  image_size: 224
-  num_workers: 4
-
-Device:
-  device: cuda
-  use_amp: True
-
-======================================================================
-
-✓ Random seed set to 42
-
-======================================================================
-Initializing Trainer - stage1_classifier
-======================================================================
-Device: cuda:1
-
-Loading data...
-[TRAIN] Loaded 586 images
-  - COVID: 269
-  - Non-COVID: 317
-[VAL] Loaded 60 images
-  - COVID: 30
-  - Non-COVID: 30
-✓ Train: 586 samples
-✓ Val: 60 samples
-
-Initializing model...
-Loading RadImageNet weights from: /home/sgram/CTXray/weights/RadImageNet-ResNet50.pth
-Detected RadImageNet format with 'backbone.' prefix, remapping...
-✓ Loaded 318/320 layers from RadImageNet
-Backbone frozen ❄️ (layer3 + layer4 + BatchNorm + classifier trainable)
-✓ Backbone frozen - only training classifier
-
-Model Parameters:
-  Total: 23,512,130
-  Trainable: 22,077,314 (93.90%)
-
-✓ Using class weights: [0.9242902398109436, 1.089219331741333]
-✓ Optimizer: ADAM
-✓ Learning rate: 0.0005
-✓ Scheduler: cosine
-✓ Mixed precision training enabled
-✓ Checkpoint directory: /home/sgram/CTXray/checkpoints/stage1
-======================================================================
-
-
-Starting training...
-======================================================================
-Epoch 1/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]train.py:191: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
-  with autocast():
-Epoch 1/25 [Train]:   6%|▌         | 1/18 [00:01<00:17,  1.02s/it]Epoch 1/25 [Train]:  22%|██▏       | 4/18 [00:01<00:03,  4.43it/s]Epoch 1/25 [Train]:  39%|███▉      | 7/18 [00:01<00:01,  8.00it/s]Epoch 1/25 [Train]:  39%|███▉      | 7/18 [00:01<00:01,  8.00it/s, loss=0.7645, acc=44.38%]Epoch 1/25 [Train]:  56%|█████▌    | 10/18 [00:01<00:00, 11.50it/s, loss=0.7645, acc=44.38%]Epoch 1/25 [Train]:  72%|███████▏  | 13/18 [00:01<00:00, 14.75it/s, loss=0.7645, acc=44.38%]Epoch 1/25 [Train]:  89%|████████▉ | 16/18 [00:01<00:00, 17.58it/s, loss=0.7645, acc=44.38%]Epoch 1/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 10.63it/s, loss=0.7645, acc=44.38%]
-Epoch 1/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 1/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.6096, acc=93.75%]Epoch 1/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  2.81it/s, loss=0.6096, acc=93.75%]Epoch 1/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  2.81it/s, loss=0.7093, acc=50.00%]Epoch 1/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  4.71it/s, loss=0.7093, acc=50.00%]
-
-Epoch 1/25:
-  Train Loss: 0.7359 | Train Acc: 48.26%
-  Val Loss:   0.7093 | Val Acc:   50.00%
-  LR: 5.00e-04
-  🎯 New best validation accuracy!
-✓ Saved best model to /home/sgram/CTXray/checkpoints/stage1/best_model.pth
-======================================================================
-Epoch 2/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 2/25 [Train]:   6%|▌         | 1/18 [00:00<00:06,  2.79it/s]Epoch 2/25 [Train]:  22%|██▏       | 4/18 [00:00<00:01,  9.69it/s]Epoch 2/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.14it/s]Epoch 2/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.14it/s, loss=0.6930, acc=54.69%]Epoch 2/25 [Train]:  56%|█████▌    | 10/18 [00:00<00:00, 17.83it/s, loss=0.6930, acc=54.69%]Epoch 2/25 [Train]:  72%|███████▏  | 13/18 [00:00<00:00, 20.51it/s, loss=0.6930, acc=54.69%]Epoch 2/25 [Train]:  89%|████████▉ | 16/18 [00:00<00:00, 22.13it/s, loss=0.6930, acc=54.69%]Epoch 2/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.64it/s, loss=0.6930, acc=54.69%]
-Epoch 2/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 2/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.6184, acc=93.75%]Epoch 2/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.56it/s, loss=0.6184, acc=93.75%]Epoch 2/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.56it/s, loss=0.6911, acc=50.00%]Epoch 2/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.79it/s, loss=0.6911, acc=50.00%]
-
-Epoch 2/25:
-  Train Loss: 0.6918 | Train Acc: 54.69%
-  Val Loss:   0.6911 | Val Acc:   50.00%
-  LR: 4.98e-04
-======================================================================
-Epoch 3/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 3/25 [Train]:   6%|▌         | 1/18 [00:00<00:05,  2.93it/s]Epoch 3/25 [Train]:  22%|██▏       | 4/18 [00:00<00:01, 10.10it/s]Epoch 3/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 15.20it/s]Epoch 3/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 15.20it/s, loss=0.6798, acc=59.06%]Epoch 3/25 [Train]:  56%|█████▌    | 10/18 [00:00<00:00, 17.49it/s, loss=0.6798, acc=59.06%]Epoch 3/25 [Train]:  72%|███████▏  | 13/18 [00:00<00:00, 20.08it/s, loss=0.6798, acc=59.06%]Epoch 3/25 [Train]:  89%|████████▉ | 16/18 [00:00<00:00, 22.12it/s, loss=0.6798, acc=59.06%]Epoch 3/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.58it/s, loss=0.6798, acc=59.06%]
-Epoch 3/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 3/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.6634, acc=68.75%]Epoch 3/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.54it/s, loss=0.6634, acc=68.75%]Epoch 3/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.54it/s, loss=0.6583, acc=73.33%]Epoch 3/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.80it/s, loss=0.6583, acc=73.33%]
-
-Epoch 3/25:
-  Train Loss: 0.6782 | Train Acc: 61.63%
-  Val Loss:   0.6583 | Val Acc:   73.33%
-  LR: 4.92e-04
-  🎯 New best validation accuracy!
-✓ Saved best model to /home/sgram/CTXray/checkpoints/stage1/best_model.pth
-======================================================================
-Epoch 4/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 4/25 [Train]:   6%|▌         | 1/18 [00:00<00:06,  2.61it/s]Epoch 4/25 [Train]:  22%|██▏       | 4/18 [00:00<00:01,  9.54it/s]Epoch 4/25 [Train]:  33%|███▎      | 6/18 [00:00<00:00, 12.13it/s]Epoch 4/25 [Train]:  50%|█████     | 9/18 [00:00<00:00, 16.45it/s]Epoch 4/25 [Train]:  50%|█████     | 9/18 [00:00<00:00, 16.45it/s, loss=0.6683, acc=67.19%]Epoch 4/25 [Train]:  67%|██████▋   | 12/18 [00:00<00:00, 19.53it/s, loss=0.6683, acc=67.19%]Epoch 4/25 [Train]:  83%|████████▎ | 15/18 [00:00<00:00, 21.75it/s, loss=0.6683, acc=67.19%]Epoch 4/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 23.36it/s, loss=0.6683, acc=67.19%]Epoch 4/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.31it/s, loss=0.6683, acc=67.19%]
-Epoch 4/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 4/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.6646, acc=59.38%]Epoch 4/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.43it/s, loss=0.6646, acc=59.38%]Epoch 4/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.43it/s, loss=0.6386, acc=73.33%]Epoch 4/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.63it/s, loss=0.6386, acc=73.33%]
-
-Epoch 4/25:
-  Train Loss: 0.6625 | Train Acc: 67.53%
-  Val Loss:   0.6386 | Val Acc:   73.33%
-  LR: 4.82e-04
-======================================================================
-Epoch 5/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 5/25 [Train]:   6%|▌         | 1/18 [00:00<00:06,  2.77it/s]Epoch 5/25 [Train]:  22%|██▏       | 4/18 [00:00<00:01, 10.12it/s]Epoch 5/25 [Train]:  33%|███▎      | 6/18 [00:00<00:01, 11.34it/s]Epoch 5/25 [Train]:  50%|█████     | 9/18 [00:00<00:00, 15.75it/s]Epoch 5/25 [Train]:  50%|█████     | 9/18 [00:00<00:00, 15.75it/s, loss=0.6463, acc=67.19%]Epoch 5/25 [Train]:  67%|██████▋   | 12/18 [00:00<00:00, 18.98it/s, loss=0.6463, acc=67.19%]Epoch 5/25 [Train]:  83%|████████▎ | 15/18 [00:01<00:00, 18.72it/s, loss=0.6463, acc=67.19%]Epoch 5/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 20.96it/s, loss=0.6463, acc=67.19%]Epoch 5/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 15.32it/s, loss=0.6463, acc=67.19%]
-Epoch 5/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 5/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.6361, acc=62.50%]Epoch 5/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.57it/s, loss=0.6361, acc=62.50%]Epoch 5/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.57it/s, loss=0.5986, acc=75.00%]Epoch 5/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.78it/s, loss=0.5986, acc=75.00%]
-
-Epoch 5/25:
-  Train Loss: 0.6417 | Train Acc: 68.92%
-  Val Loss:   0.5986 | Val Acc:   75.00%
-  LR: 4.69e-04
-  🎯 New best validation accuracy!
-✓ Saved best model to /home/sgram/CTXray/checkpoints/stage1/best_model.pth
-======================================================================
-Epoch 6/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 6/25 [Train]:   6%|▌         | 1/18 [00:00<00:07,  2.40it/s]Epoch 6/25 [Train]:  22%|██▏       | 4/18 [00:00<00:01,  9.04it/s]Epoch 6/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 13.87it/s]Epoch 6/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 13.87it/s, loss=0.6082, acc=73.75%]Epoch 6/25 [Train]:  56%|█████▌    | 10/18 [00:00<00:00, 17.49it/s, loss=0.6082, acc=73.75%]Epoch 6/25 [Train]:  72%|███████▏  | 13/18 [00:00<00:00, 19.73it/s, loss=0.6082, acc=73.75%]Epoch 6/25 [Train]:  89%|████████▉ | 16/18 [00:00<00:00, 21.73it/s, loss=0.6082, acc=73.75%]Epoch 6/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.10it/s, loss=0.6082, acc=73.75%]
-Epoch 6/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 6/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.5513, acc=81.25%]Epoch 6/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.46it/s, loss=0.5513, acc=81.25%]Epoch 6/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.46it/s, loss=0.5090, acc=85.00%]Epoch 6/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.49it/s, loss=0.5090, acc=85.00%]
-
-Epoch 6/25:
-  Train Loss: 0.5978 | Train Acc: 74.83%
-  Val Loss:   0.5090 | Val Acc:   85.00%
-  LR: 4.52e-04
-  🎯 New best validation accuracy!
-✓ Saved best model to /home/sgram/CTXray/checkpoints/stage1/best_model.pth
-======================================================================
-Epoch 7/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 7/25 [Train]:   6%|▌         | 1/18 [00:00<00:06,  2.49it/s]Epoch 7/25 [Train]:  22%|██▏       | 4/18 [00:00<00:01,  9.25it/s]Epoch 7/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.09it/s]Epoch 7/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.09it/s, loss=0.5352, acc=75.62%]Epoch 7/25 [Train]:  56%|█████▌    | 10/18 [00:00<00:00, 17.66it/s, loss=0.5352, acc=75.62%]Epoch 7/25 [Train]:  72%|███████▏  | 13/18 [00:00<00:00, 20.32it/s, loss=0.5352, acc=75.62%]Epoch 7/25 [Train]:  89%|████████▉ | 16/18 [00:00<00:00, 22.26it/s, loss=0.5352, acc=75.62%]Epoch 7/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.48it/s, loss=0.5352, acc=75.62%]
-Epoch 7/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 7/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.4739, acc=84.38%]Epoch 7/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.59it/s, loss=0.4739, acc=84.38%]Epoch 7/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.59it/s, loss=0.4229, acc=85.00%]Epoch 7/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.61it/s, loss=0.4229, acc=85.00%]
-
-Epoch 7/25:
-  Train Loss: 0.5274 | Train Acc: 76.91%
-  Val Loss:   0.4229 | Val Acc:   85.00%
-  LR: 4.32e-04
-======================================================================
-Epoch 8/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 8/25 [Train]:   6%|▌         | 1/18 [00:00<00:05,  2.88it/s]Epoch 8/25 [Train]:  22%|██▏       | 4/18 [00:00<00:01, 10.33it/s]Epoch 8/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.43it/s]Epoch 8/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.43it/s, loss=0.4597, acc=80.62%]Epoch 8/25 [Train]:  56%|█████▌    | 10/18 [00:00<00:00, 17.98it/s, loss=0.4597, acc=80.62%]Epoch 8/25 [Train]:  72%|███████▏  | 13/18 [00:00<00:00, 20.42it/s, loss=0.4597, acc=80.62%]Epoch 8/25 [Train]:  89%|████████▉ | 16/18 [00:00<00:00, 21.78it/s, loss=0.4597, acc=80.62%]Epoch 8/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.81it/s, loss=0.4597, acc=80.62%]
-Epoch 8/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 8/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.4274, acc=84.38%]Epoch 8/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.51it/s, loss=0.4274, acc=84.38%]Epoch 8/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.51it/s, loss=0.3649, acc=86.67%]Epoch 8/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.72it/s, loss=0.3649, acc=86.67%]
-
-Epoch 8/25:
-  Train Loss: 0.4635 | Train Acc: 80.38%
-  Val Loss:   0.3649 | Val Acc:   86.67%
-  LR: 4.10e-04
-  🎯 New best validation accuracy!
-✓ Saved best model to /home/sgram/CTXray/checkpoints/stage1/best_model.pth
-======================================================================
-Epoch 9/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 9/25 [Train]:   6%|▌         | 1/18 [00:00<00:05,  2.96it/s]Epoch 9/25 [Train]:  17%|█▋        | 3/18 [00:00<00:01,  7.76it/s]Epoch 9/25 [Train]:  28%|██▊       | 5/18 [00:00<00:01, 10.78it/s]Epoch 9/25 [Train]:  44%|████▍     | 8/18 [00:00<00:00, 15.60it/s]Epoch 9/25 [Train]:  44%|████▍     | 8/18 [00:00<00:00, 15.60it/s, loss=0.4013, acc=82.81%]Epoch 9/25 [Train]:  61%|██████    | 11/18 [00:00<00:00, 18.93it/s, loss=0.4013, acc=82.81%]Epoch 9/25 [Train]:  78%|███████▊  | 14/18 [00:00<00:00, 21.22it/s, loss=0.4013, acc=82.81%]Epoch 9/25 [Train]:  94%|█████████▍| 17/18 [00:01<00:00, 22.78it/s, loss=0.4013, acc=82.81%]Epoch 9/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.30it/s, loss=0.4013, acc=82.81%]
-Epoch 9/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 9/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.3861, acc=81.25%]Epoch 9/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.53it/s, loss=0.3861, acc=81.25%]Epoch 9/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.53it/s, loss=0.3361, acc=85.00%]Epoch 9/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.80it/s, loss=0.3361, acc=85.00%]
-
-Epoch 9/25:
-  Train Loss: 0.3732 | Train Acc: 83.68%
-  Val Loss:   0.3361 | Val Acc:   85.00%
-  LR: 3.84e-04
-======================================================================
-Epoch 10/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 10/25 [Train]:   6%|▌         | 1/18 [00:00<00:06,  2.49it/s]Epoch 10/25 [Train]:  22%|██▏       | 4/18 [00:00<00:01,  9.39it/s]Epoch 10/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.42it/s]Epoch 10/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.42it/s, loss=0.3286, acc=85.00%]Epoch 10/25 [Train]:  56%|█████▌    | 10/18 [00:00<00:00, 17.99it/s, loss=0.3286, acc=85.00%]Epoch 10/25 [Train]:  72%|███████▏  | 13/18 [00:00<00:00, 20.56it/s, loss=0.3286, acc=85.00%]Epoch 10/25 [Train]:  89%|████████▉ | 16/18 [00:00<00:00, 22.40it/s, loss=0.3286, acc=85.00%]Epoch 10/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.52it/s, loss=0.3286, acc=85.00%]
-Epoch 10/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 10/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.4201, acc=81.25%]Epoch 10/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.55it/s, loss=0.4201, acc=81.25%]Epoch 10/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.55it/s, loss=0.3732, acc=81.67%]Epoch 10/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.79it/s, loss=0.3732, acc=81.67%]
-
-Epoch 10/25:
-  Train Loss: 0.3203 | Train Acc: 85.24%
-  Val Loss:   0.3732 | Val Acc:   81.67%
-  LR: 3.57e-04
-EarlyStopping counter: 1/12
-======================================================================
-Epoch 11/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 11/25 [Train]:   6%|▌         | 1/18 [00:00<00:06,  2.43it/s]Epoch 11/25 [Train]:  22%|██▏       | 4/18 [00:00<00:01,  9.21it/s]Epoch 11/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.19it/s]Epoch 11/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.19it/s, loss=0.2860, acc=87.81%]Epoch 11/25 [Train]:  56%|█████▌    | 10/18 [00:00<00:00, 17.76it/s, loss=0.2860, acc=87.81%]Epoch 11/25 [Train]:  72%|███████▏  | 13/18 [00:00<00:00, 20.36it/s, loss=0.2860, acc=87.81%]Epoch 11/25 [Train]:  89%|████████▉ | 16/18 [00:00<00:00, 22.30it/s, loss=0.2860, acc=87.81%]Epoch 11/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 15.70it/s, loss=0.2860, acc=87.81%]
-Epoch 11/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 11/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.4619, acc=81.25%]Epoch 11/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.51it/s, loss=0.4619, acc=81.25%]Epoch 11/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.51it/s, loss=0.4262, acc=78.33%]Epoch 11/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.73it/s, loss=0.4262, acc=78.33%]
-
-Epoch 11/25:
-  Train Loss: 0.2706 | Train Acc: 89.24%
-  Val Loss:   0.4262 | Val Acc:   78.33%
-  LR: 3.28e-04
-EarlyStopping counter: 2/12
-======================================================================
-Epoch 12/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 12/25 [Train]:   6%|▌         | 1/18 [00:00<00:06,  2.63it/s]Epoch 12/25 [Train]:  22%|██▏       | 4/18 [00:00<00:01,  9.75it/s]Epoch 12/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.77it/s]Epoch 12/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.77it/s, loss=0.2242, acc=90.94%]Epoch 12/25 [Train]:  56%|█████▌    | 10/18 [00:00<00:00, 18.31it/s, loss=0.2242, acc=90.94%]Epoch 12/25 [Train]:  72%|███████▏  | 13/18 [00:00<00:00, 20.11it/s, loss=0.2242, acc=90.94%]Epoch 12/25 [Train]:  89%|████████▉ | 16/18 [00:00<00:00, 22.07it/s, loss=0.2242, acc=90.94%]Epoch 12/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.74it/s, loss=0.2242, acc=90.94%]
-Epoch 12/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 12/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.4063, acc=81.25%]Epoch 12/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.57it/s, loss=0.4063, acc=81.25%]Epoch 12/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.57it/s, loss=0.3494, acc=81.67%]Epoch 12/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.81it/s, loss=0.3494, acc=81.67%]
-
-Epoch 12/25:
-  Train Loss: 0.2306 | Train Acc: 91.49%
-  Val Loss:   0.3494 | Val Acc:   81.67%
-  LR: 2.97e-04
-EarlyStopping counter: 3/12
-======================================================================
-Epoch 13/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 13/25 [Train]:   6%|▌         | 1/18 [00:00<00:05,  2.93it/s]Epoch 13/25 [Train]:  17%|█▋        | 3/18 [00:00<00:01,  7.59it/s]Epoch 13/25 [Train]:  33%|███▎      | 6/18 [00:00<00:00, 13.56it/s]Epoch 13/25 [Train]:  50%|█████     | 9/18 [00:00<00:00, 17.57it/s]Epoch 13/25 [Train]:  50%|█████     | 9/18 [00:00<00:00, 17.57it/s, loss=0.2285, acc=90.31%]Epoch 13/25 [Train]:  67%|██████▋   | 12/18 [00:00<00:00, 20.38it/s, loss=0.2285, acc=90.31%]Epoch 13/25 [Train]:  83%|████████▎ | 15/18 [00:00<00:00, 22.33it/s, loss=0.2285, acc=90.31%]Epoch 13/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 23.73it/s, loss=0.2285, acc=90.31%]Epoch 13/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.89it/s, loss=0.2285, acc=90.31%]
-Epoch 13/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 13/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.4937, acc=78.12%]Epoch 13/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.60it/s, loss=0.4937, acc=78.12%]Epoch 13/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.60it/s, loss=0.3663, acc=85.00%]Epoch 13/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.83it/s, loss=0.3663, acc=85.00%]
-
-Epoch 13/25:
-  Train Loss: 0.2257 | Train Acc: 90.45%
-  Val Loss:   0.3663 | Val Acc:   85.00%
-  LR: 2.66e-04
-EarlyStopping counter: 4/12
-======================================================================
-Epoch 14/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 14/25 [Train]:   6%|▌         | 1/18 [00:00<00:05,  2.93it/s]Epoch 14/25 [Train]:  22%|██▏       | 4/18 [00:00<00:01, 10.54it/s]Epoch 14/25 [Train]:  33%|███▎      | 6/18 [00:00<00:00, 12.14it/s]Epoch 14/25 [Train]:  50%|█████     | 9/18 [00:00<00:00, 16.43it/s]Epoch 14/25 [Train]:  50%|█████     | 9/18 [00:00<00:00, 16.43it/s, loss=0.2313, acc=90.00%]Epoch 14/25 [Train]:  67%|██████▋   | 12/18 [00:00<00:00, 19.43it/s, loss=0.2313, acc=90.00%]Epoch 14/25 [Train]:  83%|████████▎ | 15/18 [00:00<00:00, 21.62it/s, loss=0.2313, acc=90.00%]Epoch 14/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 23.15it/s, loss=0.2313, acc=90.00%]Epoch 14/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.59it/s, loss=0.2313, acc=90.00%]
-Epoch 14/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 14/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.5868, acc=78.12%]Epoch 14/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.51it/s, loss=0.5868, acc=78.12%]Epoch 14/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.51it/s, loss=0.3976, acc=86.67%]Epoch 14/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.74it/s, loss=0.3976, acc=86.67%]
-
-Epoch 14/25:
-  Train Loss: 0.2123 | Train Acc: 90.97%
-  Val Loss:   0.3976 | Val Acc:   86.67%
-  LR: 2.35e-04
-EarlyStopping counter: 5/12
-======================================================================
-Epoch 15/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 15/25 [Train]:   6%|▌         | 1/18 [00:00<00:05,  2.85it/s]Epoch 15/25 [Train]:  22%|██▏       | 4/18 [00:00<00:01,  9.76it/s]Epoch 15/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.24it/s]Epoch 15/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.24it/s, loss=0.2068, acc=90.94%]Epoch 15/25 [Train]:  56%|█████▌    | 10/18 [00:00<00:00, 14.45it/s, loss=0.2068, acc=90.94%]Epoch 15/25 [Train]:  72%|███████▏  | 13/18 [00:00<00:00, 17.58it/s, loss=0.2068, acc=90.94%]Epoch 15/25 [Train]:  89%|████████▉ | 16/18 [00:01<00:00, 20.05it/s, loss=0.2068, acc=90.94%]Epoch 15/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 15.23it/s, loss=0.2068, acc=90.94%]
-Epoch 15/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 15/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.5010, acc=78.12%]Epoch 15/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.58it/s, loss=0.5010, acc=78.12%]Epoch 15/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.58it/s, loss=0.4159, acc=81.67%]Epoch 15/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.85it/s, loss=0.4159, acc=81.67%]
-
-Epoch 15/25:
-  Train Loss: 0.1892 | Train Acc: 91.32%
-  Val Loss:   0.4159 | Val Acc:   81.67%
-  LR: 2.04e-04
-EarlyStopping counter: 6/12
-======================================================================
-Epoch 16/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 16/25 [Train]:   6%|▌         | 1/18 [00:00<00:05,  2.85it/s]Epoch 16/25 [Train]:  22%|██▏       | 4/18 [00:00<00:01, 10.35it/s]Epoch 16/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.58it/s]Epoch 16/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.58it/s, loss=0.1611, acc=95.62%]Epoch 16/25 [Train]:  56%|█████▌    | 10/18 [00:00<00:00, 18.15it/s, loss=0.1611, acc=95.62%]Epoch 16/25 [Train]:  72%|███████▏  | 13/18 [00:00<00:00, 20.68it/s, loss=0.1611, acc=95.62%]Epoch 16/25 [Train]:  89%|████████▉ | 16/18 [00:00<00:00, 21.76it/s, loss=0.1611, acc=95.62%]Epoch 16/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.45it/s, loss=0.1611, acc=95.62%]
-Epoch 16/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 16/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.6098, acc=78.12%]Epoch 16/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.50it/s, loss=0.6098, acc=78.12%]Epoch 16/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.50it/s, loss=0.4376, acc=85.00%]Epoch 16/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.72it/s, loss=0.4376, acc=85.00%]
-
-Epoch 16/25:
-  Train Loss: 0.1672 | Train Acc: 94.62%
-  Val Loss:   0.4376 | Val Acc:   85.00%
-  LR: 1.73e-04
-EarlyStopping counter: 7/12
-======================================================================
-Epoch 17/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 17/25 [Train]:   6%|▌         | 1/18 [00:00<00:06,  2.78it/s]Epoch 17/25 [Train]:  22%|██▏       | 4/18 [00:00<00:01,  9.70it/s]Epoch 17/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.38it/s]Epoch 17/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.38it/s, loss=0.1793, acc=93.75%]Epoch 17/25 [Train]:  56%|█████▌    | 10/18 [00:00<00:00, 17.89it/s, loss=0.1793, acc=93.75%]Epoch 17/25 [Train]:  72%|███████▏  | 13/18 [00:00<00:00, 20.38it/s, loss=0.1793, acc=93.75%]Epoch 17/25 [Train]:  89%|████████▉ | 16/18 [00:00<00:00, 22.17it/s, loss=0.1793, acc=93.75%]Epoch 17/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.29it/s, loss=0.1793, acc=93.75%]
-Epoch 17/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 17/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.6531, acc=78.12%]Epoch 17/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.50it/s, loss=0.6531, acc=78.12%]Epoch 17/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.50it/s, loss=0.4181, acc=85.00%]Epoch 17/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.73it/s, loss=0.4181, acc=85.00%]
-
-Epoch 17/25:
-  Train Loss: 0.1804 | Train Acc: 93.06%
-  Val Loss:   0.4181 | Val Acc:   85.00%
-  LR: 1.44e-04
-EarlyStopping counter: 8/12
-======================================================================
-Epoch 18/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 18/25 [Train]:   6%|▌         | 1/18 [00:00<00:06,  2.64it/s]Epoch 18/25 [Train]:  22%|██▏       | 4/18 [00:00<00:01,  9.81it/s]Epoch 18/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.84it/s]Epoch 18/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.84it/s, loss=0.1998, acc=91.56%]Epoch 18/25 [Train]:  56%|█████▌    | 10/18 [00:00<00:00, 18.37it/s, loss=0.1998, acc=91.56%]Epoch 18/25 [Train]:  72%|███████▏  | 13/18 [00:00<00:00, 20.91it/s, loss=0.1998, acc=91.56%]Epoch 18/25 [Train]:  89%|████████▉ | 16/18 [00:00<00:00, 21.90it/s, loss=0.1998, acc=91.56%]Epoch 18/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.78it/s, loss=0.1998, acc=91.56%]
-Epoch 18/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 18/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.4455, acc=78.12%]Epoch 18/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.60it/s, loss=0.4455, acc=78.12%]Epoch 18/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.60it/s, loss=0.3977, acc=81.67%]Epoch 18/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.84it/s, loss=0.3977, acc=81.67%]
-
-Epoch 18/25:
-  Train Loss: 0.1690 | Train Acc: 93.06%
-  Val Loss:   0.3977 | Val Acc:   81.67%
-  LR: 1.17e-04
-EarlyStopping counter: 9/12
-======================================================================
-Epoch 19/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 19/25 [Train]:   6%|▌         | 1/18 [00:00<00:05,  3.07it/s]Epoch 19/25 [Train]:  17%|█▋        | 3/18 [00:00<00:01,  7.58it/s]Epoch 19/25 [Train]:  33%|███▎      | 6/18 [00:00<00:00, 13.53it/s]Epoch 19/25 [Train]:  50%|█████     | 9/18 [00:00<00:00, 17.59it/s]Epoch 19/25 [Train]:  50%|█████     | 9/18 [00:00<00:00, 17.59it/s, loss=0.1243, acc=95.62%]Epoch 19/25 [Train]:  67%|██████▋   | 12/18 [00:00<00:00, 20.40it/s, loss=0.1243, acc=95.62%]Epoch 19/25 [Train]:  83%|████████▎ | 15/18 [00:00<00:00, 22.03it/s, loss=0.1243, acc=95.62%]Epoch 19/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 23.49it/s, loss=0.1243, acc=95.62%]Epoch 19/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.90it/s, loss=0.1243, acc=95.62%]
-Epoch 19/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 19/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.5058, acc=78.12%]Epoch 19/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.64it/s, loss=0.5058, acc=78.12%]Epoch 19/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.64it/s, loss=0.3895, acc=83.33%]Epoch 19/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.91it/s, loss=0.3895, acc=83.33%]
-
-Epoch 19/25:
-  Train Loss: 0.1225 | Train Acc: 95.49%
-  Val Loss:   0.3895 | Val Acc:   83.33%
-  LR: 9.15e-05
-EarlyStopping counter: 10/12
-======================================================================
-Epoch 20/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 20/25 [Train]:   6%|▌         | 1/18 [00:00<00:05,  3.13it/s]Epoch 20/25 [Train]:  17%|█▋        | 3/18 [00:00<00:01,  8.02it/s]Epoch 20/25 [Train]:  33%|███▎      | 6/18 [00:00<00:00, 13.96it/s]Epoch 20/25 [Train]:  50%|█████     | 9/18 [00:00<00:00, 17.91it/s]Epoch 20/25 [Train]:  50%|█████     | 9/18 [00:00<00:00, 17.91it/s, loss=0.0911, acc=97.19%]Epoch 20/25 [Train]:  67%|██████▋   | 12/18 [00:00<00:00, 18.29it/s, loss=0.0911, acc=97.19%]Epoch 20/25 [Train]:  83%|████████▎ | 15/18 [00:00<00:00, 20.34it/s, loss=0.0911, acc=97.19%]Epoch 20/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 21.44it/s, loss=0.0911, acc=97.19%]Epoch 20/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.18it/s, loss=0.0911, acc=97.19%]
-Epoch 20/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 20/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.5424, acc=78.12%]Epoch 20/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.57it/s, loss=0.5424, acc=78.12%]Epoch 20/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.57it/s, loss=0.4082, acc=83.33%]Epoch 20/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.83it/s, loss=0.4082, acc=83.33%]
-
-Epoch 20/25:
-  Train Loss: 0.1124 | Train Acc: 96.35%
-  Val Loss:   0.4082 | Val Acc:   83.33%
-  LR: 6.86e-05
-EarlyStopping counter: 11/12
-======================================================================
-Epoch 21/25 [Train]:   0%|          | 0/18 [00:00<?, ?it/s]Epoch 21/25 [Train]:   6%|▌         | 1/18 [00:00<00:06,  2.63it/s]Epoch 21/25 [Train]:  22%|██▏       | 4/18 [00:00<00:01,  9.74it/s]Epoch 21/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.74it/s]Epoch 21/25 [Train]:  39%|███▉      | 7/18 [00:00<00:00, 14.74it/s, loss=0.1314, acc=95.00%]Epoch 21/25 [Train]:  56%|█████▌    | 10/18 [00:00<00:00, 18.23it/s, loss=0.1314, acc=95.00%]Epoch 21/25 [Train]:  72%|███████▏  | 13/18 [00:00<00:00, 20.69it/s, loss=0.1314, acc=95.00%]Epoch 21/25 [Train]:  89%|████████▉ | 16/18 [00:00<00:00, 22.25it/s, loss=0.1314, acc=95.00%]Epoch 21/25 [Train]: 100%|██████████| 18/18 [00:01<00:00, 16.67it/s, loss=0.1314, acc=95.00%]
-Epoch 21/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s]Epoch 21/25 [Val]  :   0%|          | 0/2 [00:00<?, ?it/s, loss=0.5721, acc=78.12%]Epoch 21/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.57it/s, loss=0.5721, acc=78.12%]Epoch 21/25 [Val]  :  50%|█████     | 1/2 [00:00<00:00,  3.57it/s, loss=0.4305, acc=83.33%]Epoch 21/25 [Val]  : 100%|██████████| 2/2 [00:00<00:00,  5.85it/s, loss=0.4305, acc=83.33%]
-
-Epoch 21/25:
-  Train Loss: 0.1140 | Train Acc: 95.66%
-  Val Loss:   0.4305 | Val Acc:   83.33%
-  LR: 4.87e-05
-EarlyStopping counter: 12/12
-
-⚠️  Early stopping triggered at epoch 21
-
-✓ Training complete!
-  Time elapsed: 0.76 minutes
-  Best Val Acc: 86.67%
-  Best Val Loss: 0.3649
-
-✓ History saved to: /home/sgram/CTXray/checkpoints/stage1/training_history.json
-======================================================================

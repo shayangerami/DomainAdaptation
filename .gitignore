@@ -32,10 +32,9 @@ ENV/
 *.cache
 .cache/
 
-# Logs (optional - you can include logs if you want)
-# Uncomment to exclude logs:
-# logs/
-# *.log
+# Logs
+logs/
+*.log
 
 # OS files
 .DS_Store
